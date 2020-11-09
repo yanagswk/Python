@@ -1,0 +1,8 @@
+$index番目の$rest_nameの詳細を表示します。
+前に戻る場合は、「b」を押してれください。
+名前 : $name
+住所 : $address
+営業時間 : $opentime
+電話番号 : $tel
+最寄駅  : $access_station
+平均額  : $budget
