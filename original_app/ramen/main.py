@@ -1,6 +1,11 @@
+import logging
 import settings
 from robot import hello_robot
 from api.get_api_data import GetApi
+
+from log.logger import get_logger
+
+logger = get_logger(__name__)
 
 
 def rest(restrants, serch_word, page_count_test, flag=False):
@@ -71,8 +76,11 @@ def main():
     keyword = hello_robot.keyword(birth_place)
     serch_word = '{},{}'.format(birth_place, keyword)
 
+    logger.debug("キーワード「{}」で、ぐるなびAPI取得開始".format(serch_word))
     # ぐるなびAPIにてキーワードを投げて、レストラン情報を取得する。
     restrants = GetApi(serch_word, birth_place, keyword).get_rest()
+
+    logger.debug("ぐるなびAPI取得完了")
 
     rest(restrants, serch_word, page_count_test, flag=True)
 
