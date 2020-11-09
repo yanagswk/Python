@@ -1,0 +1,7 @@
+{
+    "python.pythonPath": "/Users/yanagswk/opt/anaconda3/bin/python",
+    "python.linting.enabled": true,
+    "python.linting.pylintEnabled": false,
+    "python.linting.pycodestyleEnabled": true,
+    "python.linting.lintOnSave": true
+}
