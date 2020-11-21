@@ -1,0 +1,12 @@
+[answer34]
+
+df['sex'][df['sex'] == 'male'] = 0
+df['sex'][df['sex'] == 'female'] = 1
+df.head()
+
+
+[Tips]
+df['sex'][df['sex'] == 'male'] = 0
+↑
+「df['sex']において、dfのsex列がmaleと
+なっているレコードを0に置き換える」
