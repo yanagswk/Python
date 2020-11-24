@@ -1,39 +1,42 @@
-class Student:
-    def __init__(self, name, school):
-        self.name = name
-        self.school = school
-        self.marks = []
-
-    def average(self):
-        """ 平均成績
-        """
-        return sum(self.marks) / len(self.marks)
-
-    @classmethod
-    def friend(cls, origin, friend_name, *args):
-        """
-        同じ学校の友達を追加する。
-        継承クラスで動作が変わるべき(継承クラスでは salaryプロパティがある)
-        なのでclassmethodを使う。
-        子クラスの初期化引数は *argsで受けるのがいい
-        """
-        return cls(friend_name, origin.school, *args)
-    
-    @staticmethod
-    def say_hello():
-        """
-        先生に挨拶する
-        継承しても同じ動きでいいのでstaticmethodを使う
-        """
-        print("Hello Teacher")
-        
-
-class WorkingStudent(Student):
-    def __init__(self, name, school, salary):
-        super().__init__(name, school)
-        self.salary = salary
+class Singleton(object):
+    # __new__はインスタンスが生成する前に呼ばれる
+    def __new__(cls, *args, **kargs):
+        # hasattrは第一引数のオブジェクトが、第二引数の属性名(文字列)を持っているかを判定
+        if not hasattr(cls, "_instance"):
+            cls._instance = super(Singleton, cls).__new__(cls)
+        return cls._instance
 
 
-hiro = WorkingStudent("Hiro", "Stanford", 20.00)
-mitsu = WorkingStudent.friend(hiro, "Mitsu", 15.00)
-print(mitsu.salary)
+class Myclass(Singleton):
+    def __init__(self, input):
+        self.input = input
+
+
+if __name__ == '__main__':
+    one = Myclass(1)
+    print("one.input={0}".format(one.input))
+    two = Myclass(2)
+    print("one.input={0}, two.input={1}".format(one.input, two.input))
+    one.input = 0
+    print("one.input={0}, two.input={1}".format(one.input, two.input))
+
+
+# class Sandwich:
+#     __singleton = None
+
+#     def __new__(cls, *args, **kwargs):
+#         if not cls.__singleton:
+#             cls.__singleton = super(Sandwich, cls).__new__(cls)
+#         return cls.__singleton
+
+#     def set_spam(self, spam=None):
+#         self.__spam = spam
+
+#     def get_spam(self):
+#         return print(self.__spam)
+
+# sw1 と sw2 は同じものだということがわかる。
+# sw1 = Sandwich()
+# sw2 = Sandwich()
+# sw1.set_spam('spam spam spam')
+# sw2.get_spam()
