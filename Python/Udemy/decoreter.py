@@ -36,4 +36,3 @@ r = add_num(10, 20)
 print(r)
 # r = sub_num(10, 20)
 # print(r)
-
