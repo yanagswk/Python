@@ -47,8 +47,8 @@
 |ブランチ名を変更             |git branch -m <ブランチ名>                   |                                                                                         |
 |ブランチ削除                 |git branch -d <ブランチ名>                   |                                                                                         |
 |変更履歴をマージする         |git merge <ブランチ名>                       |                                                                                         |
-|                             |git merge <リモート名/ブランチ名>            |                                                                                         |
-|                             |git merge <リモート名/ブランチ名>            |作業中のブランチにマージする                                                             |
+|                             |git merge <リモート名/ブランチ名>            | git merge origin master                                                              |
+|
 |リモートから取得する (fetch)    |git fetch <リモート名>                       | リモートリポジトリからローカルリポジトリに取得。ワークツリーには反映されない。反映するには、git merge origin/masterをする。  |
 |プルのマージ型               |git pull <リモート名> <ブランチ名>           | git pull origin master  リモートリポジトリからローカルリポジトリに取得して、ワークツリーにも反映する。|
 |プルのリベース型             |git pull --rebase <リモート名> <ブランチ名>  | git pull --rebase origin master master                                                  |
