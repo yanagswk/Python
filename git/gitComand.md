@@ -1,5 +1,6 @@
-# gitコマンド一覧  
+# [参考動画](https://www.udemy.com/course/unscared_git/)
 
+# gitコマンド一覧  
 
 |項目                         |コマンド                                     |備考                                                                                     |
 | ---                         | ---                                         | ---                                                                                     |
@@ -14,25 +15,24 @@
 |                         |                                                | <span style="color: red; ">M</span>→編集・変更・削除されているが、まだ git add されていないファイルの一覧    |
 |                         |                                                | <span style="color: red; ">??</span>→Git管理されていない、かつ .gitignore で管理除外対象にもされていないものの一覧 |
 |リポジトリをクローンする     |git clone <githubのurl>                      |                                                                                         |
-|変更履歴を確認               |git log                                      |                                                                                         |
+|コミット履歴を確認           |git log                                      |   --decorateでどのブランチがどのコミットを指しているかを確認できる。                                      |
 |                             |git log --oneline                            | 一行でログを表示                                                                        |
 |                             |git log -p <ファイル名>                      | ファイルの変更差分を表示。ファイルの中身が開く                                          | 
-|                             |git log -n <コミット数>                      | 表示するコミット数を引数に入れる                                                        |
+|                             |git log -n <コミット数>                      | 表示するコミット数を引数に入れる。直前のコミットをみたいなら1をいれる。                                 |
 |ファイルの削除               |git rm <ファイル名>                          | リポジトリから削除(コミットしたもの)。ファイルも削除。削除された状態がステージに記録される。            |
 |                             |git rm -r <ディレクトリ名>                      | リポジトリから削除(コミットしたもの)。ディレクトリも削除。                                                        |
 |                             |git rm --cached                              | リポジトリのみ削除(コミットしたもの)。ファイルは残る。                                                      |
-|ファイルの移動               |git mv <旧ファイル名> <新ファイル名>         | ステージにも変更されている。git rm <旧ファイル> → git add <新ファイル>と同じことをやる |
-|githubを登録                 |git remote add origin <githubのurl>          | ショートカットoriginでurlのリモートリポジトリを登録する                                 |
+|ファイルの移動　　　　　　　　　   |git mv <旧ファイル名> <新ファイル名>         | ワークツリーの移動+ステージにも追加。　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　 |
+|ファイル名変更　　　　　　　　　   |git mv <ファイル名> <移動先>                | ワークツリーの変更+ステージにも追加。　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　 |
+|githubを登録                 |git remote add origin <githubのurl>          | originというショートカットでurlのリモートリポジトリを登録する。今後はoriginでリモートリポジトリにアップしたり、取得したりできる。リモートリポジトリは複数登録できて、originとは別の名前のショートカットで登録する。        |
 |                             |git remote add <リモート名>                  |リモートリポジトリを新規追加                                                             |
-|リモート表示                 |git remote                                   |                                                                                         |
-|                             |git remote -v                                | 対応するURLを表示                                                                       |
-|                             |git remote show origin                       | git remoteよりも詳しい情報が表示。originはリモート名                                    |
+|リモートリポジトリ確認           |git remote                                   |  -vでURL表示。 git remote show originでさらに詳しく表示。                            |
 |リモート名変更               |git remote rename <旧リモート> <新リモート>  |                                                                                         |
 |リモート名削除               |git remote rm <リモート>                     |                                                                                         |
 |リモートリポジトリへ送信     |git push <リモート名><ブランチ名>            | git push origin master                                                                  |
-|                             |git push -u origin master                    | -uで次回以降はgit pushでorigin masterにpushする                                         |
+|                             |git push -u origin master                    | -uで次回以降はgit pushでorigin fmasterにpushする                                         |
 |コマンドにエイリアス         |git config --global alias st status          | 省略したい単語、コマンドの順番。--globalでpc全体の設定になる。                          |
-|addを取り消す                |git reset HEAD <ファイル名>                  | HEADはブランチ名                                                                        |
+|addを取り消す                |git reset HEAD <ファイル名>                  | HEADは自分が作業しているブランチ名。                                                             |
 |                             |git reset HEAD <ディレクトリ名>              |                                                                                         |
 |                             |git reset HEAD .                             | addしたものすべて取り消す                                                               |
 |ファイルの変更を取り消す     |git checkout -- <ファイル名>                 | "--"はブランチ名とファイル名が被ったときに、どちらを指してるか明確にするためにつける    |
@@ -40,16 +40,17 @@
 |                             |git checkout -- .                            |                                                                                         |
 |直前のコミットをやり直す     |git commit --amend                           | 実行するとエディタが表示される。中身もかえるなら、ファイルを直してaddした後に実行する。 |
 |情報を取得す                 |git fetch <リモート名>                       |  git fetch origin                                                                       |
-|ブランチを作成               |git branch <ブランチ名>                      |                                                                                         |
-|ブランチ一覧                 |git branch                                   | git branch -a                                                                           |
-|ブランチを切り替える         |git branch <既存ブランチ名>                  |                                                                                         |
-|                             |git branch -b <新ブランチ名>                 | ブランチを新規作成して切り替える                                                        |
+|ブランチを作成               |git branch <ブランチ名>                      |  ブランチを作成するだけで、切り替わらない。                                                            |
+|ブランチ一覧                 |git branch                                   | git branch -a すべてのブランチを表示                                                         |
+|ブランチを切り替える         |git checkout <既存ブランチ名>                  |                                                                                         |
+|                             |git checkout -b <新ブランチ名>                 | ブランチを新規作成して切り替える                                                        |
 |ブランチ名を変更             |git branch -m <ブランチ名>                   |                                                                                         |
 |ブランチ削除                 |git branch -d <ブランチ名>                   |                                                                                         |
 |変更履歴をマージする         |git merge <ブランチ名>                       |                                                                                         |
 |                             |git merge <リモート名/ブランチ名>            |                                                                                         |
 |                             |git merge <リモート名/ブランチ名>            |作業中のブランチにマージする                                                             |
-|プルのマージ型               |git pull <リモート名> <ブランチ名>           | git pull origin master                                                                  |
+|リモートから取得する (fetch)    |git fetch <リモート名>                       | リモートリポジトリからローカルリポジトリに取得。ワークツリーには反映されない。反映するには、git merge origin/masterをする。  |
+|プルのマージ型               |git pull <リモート名> <ブランチ名>           | git pull origin master  リモートリポジトリからローカルリポジトリに取得して、ワークツリーにも反映する。|
 |プルのリベース型             |git pull --rebase <リモート名> <ブランチ名>  | git pull --rebase origin master master                                                  |
 |タグ作成(軽量版タグ)         |git tag [タグ名]                             |                                                                                         |
 |タグを作成(注釈付きタグ)     |git tag -a [タグ名] -m "[メッセージ]"        |                                                                                         |
