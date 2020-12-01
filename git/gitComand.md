@@ -44,9 +44,9 @@
 |ブランチ一覧                 |git branch                                   | git branch -a すべてのブランチを表示                                                         |
 |ブランチを切り替える         |git checkout <既存ブランチ名>                  |                                                                                         |
 |                             |git checkout -b <新ブランチ名>                 | ブランチを新規作成して切り替える                                                        |
-|ブランチ名を変更             |git branch -m <ブランチ名>                   |                                                                                         |
+|ブランチ名を変更             |git branch -m <新ブランチ名>                   |  現在いるブランチ名を変更                                                                      |
 |ブランチ削除                 |git branch -d <ブランチ名>                   |                                                                                         |
-|変更履歴をマージする         |git merge <ブランチ名>                       |                                                                                         |
+|変更履歴をマージする         |git merge <ブランチ名>                       | コンフリクトが起きた場合は、git statusで確認                                                   |
 |                             |git merge <リモート名/ブランチ名>            | git merge origin master                                                              |
 |
 |リモートから取得する (fetch)    |git fetch <リモート名>                       | リモートリポジトリからローカルリポジトリに取得。ワークツリーには反映されない。反映するには、git merge origin/masterをする。  |
