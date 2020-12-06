@@ -11,8 +11,8 @@
 |変更差分を確認               |git diff (<ファイル名>)                                    | addする前の変更分。ステージに追加する前にどのような変更を行ったかを確認。                          |
 |                             |git diff --staged                            | addした後の変更分。コミットする前にどのような変更を行ったかを確認。                        |
 |変更したファイルを確認       |git status                                   | addできるファイルとcommitできるファイルを確認できる                                          |
-|                         |git status -s                                   | <span style="color: green; ">M</span>→git add されているけどまだ git commit されていないファイルの一覧    |
-|                         |                                                | <span style="color: red; ">M</span>→編集・変更・削除されているが、まだ git add されていないファイルの一覧    |
+|                         |git status -s                                   | <span style="color: green; ">M(緑)</span>→git add されているけどまだ git commit されていないファイルの一覧    |
+|                         |                                                | <span style="color: red; ">M(赤)</span>→編集・変更・削除されているが、まだ git add されていないファイルの一覧    |
 |                         |                                                | <span style="color: red; ">??</span>→Git管理されていない、かつ .gitignore で管理除外対象にもされていないものの一覧 |
 |リポジトリをクローンする     |git clone <githubのurl>                      |                                                                                         |
 |コミット履歴を確認           |git log                                      |   --decorateでどのブランチがどのコミットを指しているかを確認できる。                                      |
@@ -48,8 +48,7 @@
 |ブランチ削除                 |git branch -d <ブランチ名>                   |                                                                                         |
 |変更履歴をマージする         |git merge <ブランチ名>                       | コンフリクトが起きた場合は、git statusで確認                                                   |
 |                             |git merge <リモート名/ブランチ名>            | git merge origin master                                                              |
-|
-|リモートから取得する (fetch)    |git fetch <リモート名>                       | リモートリポジトリからローカルリポジトリに取得。ワークツリーには反映されない。反映するには、git merge origin/masterをする。  |
+|リモートから取得する (fetch) |git fetch <リモート名>                       | リモートリポジトリからローカルリポジトリに取得。ワークツリーには反映されない。反映するには、git merge origin/masterをする。  |
 |プルのマージ型               |git pull <リモート名> <ブランチ名>           | git pull origin master  リモートリポジトリからローカルリポジトリに取得して、ワークツリーにも反映する。|
 |プルのリベース型             |git pull --rebase <リモート名> <ブランチ名>  | git pull --rebase origin master master                                                  |
 |タグ作成(軽量版タグ)         |git tag [タグ名]                             |                                                                                         |
