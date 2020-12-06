@@ -5,11 +5,9 @@ __pycach__
 original_app/ramen/settings.py
 ramen/settings.py
 Python/文字の削除・分割・結合/gittest.txt
-.vscode/
+Python/.vscode/
 git/gitComand.txt
 git/gitComand copy.txt
-
-
-
-
-
+Python/API/
+Udemy/
+.vscode/
