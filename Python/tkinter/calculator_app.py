@@ -1,4 +1,4 @@
-# 電卓アプリ
+# 電卓アプリ作成
 
 import tkinter as tk
 
