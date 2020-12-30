@@ -2,7 +2,7 @@ import os
 import re
 import datetime as dt
 
-ITEMS_TABLE = "items.csv"
+ITEMS_TABLE = "items.tsv"
 ORDER_DIR = "order"
 DELIVERY = "delivery"
 FAILURE = "failure"
@@ -145,8 +145,8 @@ def write_orders(validated_orders, order_day=None, failure=False):
 def main(order_day=None):
     """main処理
     """
-
-    order_day = order_day or dt.date.today()
+    
+    order_day = dt.date.today()
 
     # 商品一覧読み込み
     items = load_item()
@@ -179,4 +179,5 @@ def main(order_day=None):
 
 if __name__ == "__main__":
 
-    main(dt.date(2016, 12, 14))
+    # main(dt.date(2016, 12, 14))
+    main()
