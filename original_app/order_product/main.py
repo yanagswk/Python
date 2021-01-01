@@ -30,7 +30,7 @@ class Order:
         self.order_date_str = order_date
         self.order_date = None
 
-    def validate(self, items):
+    def validate(self, items, order_day):
         """ 注文リストが正しい表記か、バリテーションチェックをする
         """
         flag = False
@@ -46,10 +46,10 @@ class Order:
         if not self.AMOUNT_RE.search(self.order_amount):
             return False
         # 0よりも大きいかを確認
-        if int(self.order_amount) < 0:
+        if int(self.order_amount) <= 0:
             return False
 
-        # 住所(order_adress)が指定されているか
+        # 住所(order_adress)が指定されているか確認
         if not self.order_adress:
             return False
 
@@ -57,7 +57,7 @@ class Order:
         if not self.TEL_RE.search(self.order_tel):
             return False
 
-        # 名前(order_name)が指定されてるか
+        # 名前(order_name)が指定されてるか確認
         if not self.order_name:
             return False
 
@@ -66,6 +66,10 @@ class Order:
             self.order_date = dt.datetime.strptime(self.order_date_str,
                                                    '%Y-%m-%d')
         except ValueError:
+            return False
+        
+        # # 宅配日が当日以降の日付か確認
+        if self.order_date.date() < order_day:
             return False
 
         # すべてのチェックが通ったらTrueを返す
@@ -103,28 +107,31 @@ def load_item():
 def read_order(order_day):
     """ 当日の注文受付
     """
-    # day_str = f"{order_day: "%Y%m%d"}"
-    day_str = order_day.strftime("%Y%m%d")
+    order_list = []
+    day_str = f"{order_day:%Y%m%d}"
     for filename in os.listdir(ORDER_DIR):
         if day_str not in filename:
             continue
 
         order_path = os.path.join(ORDER_DIR, filename)
 
-        order_list = []
         with open(order_path, 'r', encoding="UTF-8") as read_order:
             for row in read_order:
                 order_item_id, order_amount, order_adress, order_tel,\
                     order_name, order_date = row.split(",")
                 order = Order(order_item_id.strip(),
-                              order_amount.strip(),
-                              order_adress.strip(),
-                              order_tel.strip(),
-                              order_name.strip(),
-                              order_date.strip()
-                              )
+                            order_amount.strip(),
+                            order_adress.strip(),
+                            order_tel.strip(),
+                            order_name.strip(),
+                            order_date.strip()
+                            )
                 order_list.append(order)
+
+    if order_list:
         return order_list
+    else:
+        raise FileNotFoundError(f'{day_str}のファイルが存在しません。')
 
 
 def write_orders(validated_orders, order_day=None, failure=False):
@@ -146,7 +153,7 @@ def main(order_day=None):
     """main処理
     """
     
-    order_day = dt.date.today()
+    order_day = order_day or dt.date.today()
 
     # 商品一覧読み込み
     items = load_item()
@@ -161,7 +168,7 @@ def main(order_day=None):
 
         # バリテーションチェックをする。
         # すべてTrueならvalidated_ordersにいれる。
-        if order.validate(items):
+        if order.validate(items, order_day):
             validated_orders.append(order)
 
         # １つでもFalseの場合は、failed_ordersにいれる。
@@ -179,5 +186,4 @@ def main(order_day=None):
 
 if __name__ == "__main__":
 
-    # main(dt.date(2016, 12, 14))
-    main()
+    main(dt.date(2020, 12, 25))
