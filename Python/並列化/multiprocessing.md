@@ -460,7 +460,7 @@ MainProcess: [4, 8, 12, 16, 20]
 
 Managerもマルチプロセスで共有メモリとして扱えるが、速度が若干遅い。  
 
-```python:mult.py
+```python:mult
 import logging
 import multiprocessing
 import time
