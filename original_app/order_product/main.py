@@ -2,10 +2,15 @@ import os
 import re
 import datetime as dt
 
+from log import get_logger
+
+
 ITEMS_TABLE = "items.tsv"
 ORDER_DIR = "order"
 DELIVERY = "delivery"
 FAILURE = "failure"
+
+logger = get_logger()
 
 
 class Item:
@@ -67,7 +72,7 @@ class Order:
                                                    '%Y-%m-%d')
         except ValueError:
             return False
-        
+
         # # 宅配日が当日以降の日付か確認
         if self.order_date.date() < order_day:
             return False
@@ -120,12 +125,12 @@ def read_order(order_day):
                 order_item_id, order_amount, order_adress, order_tel,\
                     order_name, order_date = row.split(",")
                 order = Order(order_item_id.strip(),
-                            order_amount.strip(),
-                            order_adress.strip(),
-                            order_tel.strip(),
-                            order_name.strip(),
-                            order_date.strip()
-                            )
+                              order_amount.strip(),
+                              order_adress.strip(),
+                              order_tel.strip(),
+                              order_name.strip(),
+                              order_date.strip()
+                              )
                 order_list.append(order)
 
     if order_list:
@@ -152,7 +157,7 @@ def write_orders(validated_orders, order_day=None, failure=False):
 def main(order_day=None):
     """main処理
     """
-    
+
     order_day = order_day or dt.date.today()
 
     # 商品一覧読み込み
@@ -178,10 +183,12 @@ def main(order_day=None):
     # 日別注文ファイル書き込み
     if validated_orders:
         write_orders(validated_orders)
+        logger.info('日別注文ファイルの書き込みが完了しました。')
 
     # 注文受付失敗ファイル書き込み
     if failed_orders:
         write_orders(failed_orders, order_day, failure=True)
+        logger.info('注文受付失敗ファイルの書き込みが完了しました。')
 
 
 if __name__ == "__main__":
