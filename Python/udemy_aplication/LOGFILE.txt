@@ -1,2 +1,0 @@
-2020-10-17 23:01:50,376:robot.py:36:INFO:info Roboko
-2020-10-17 23:27:32,454:robot.py:36:INFO:info Roboko
