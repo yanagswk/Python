@@ -4,8 +4,6 @@ import sys
 import tempfile
 import unittest
 
-sys.path.append(os.path.abspath(
-    r"/Users/yanagswk/個人用/Python/original_app/order_product"))
 import main
 
 
