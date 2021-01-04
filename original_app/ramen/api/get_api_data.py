@@ -2,7 +2,7 @@ import requests
 import pprint
 
 import settings
-from views.find_file import GetTemplate
+from views import find_file
 
 
 class GetApi:
@@ -36,7 +36,7 @@ class GetApi:
         try:
             return self.restrants_dict[self.api_key]
         except KeyError:
-            template = GetTemplate().get_template('error_keyword.txt')
+            template = find_file.get_template('error_keyword.txt')
             keyword = input(template.substitute({'error_keyword':
                                                  self.keyword}))
             return GetApi('{},{}'.format(self.birth_place, keyword),
